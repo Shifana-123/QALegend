@@ -16,7 +16,7 @@ public class ResetPage {
     @FindBy(xpath="//button[@type='submit']")
     WebElement sendPassWordResetLinkButton;
 
-    @FindBy(xpath = "//span[@class='help-block']//strong[contains(text(),'We can')]")
+    @FindBy(xpath = "/html/body/div[3]/div/div/div/div[2]/form/div[1]/div/span/strong")
     WebElement resetPassWordErrorMessageField;
 
     @FindBy(id = "email")

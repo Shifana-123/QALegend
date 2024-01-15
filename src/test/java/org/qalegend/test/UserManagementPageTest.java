@@ -12,8 +12,8 @@ import java.util.List;
 import static org.qalegend.utilities.ExcelUtility.readData;
 
 public class UserManagementPageTest extends Base {
-    /*@Test
-    //public void verifyUserManagementOptions() {
+    @Test
+    public void verifyUserManagementOptions() {
         LoginPage login=new LoginPage(driver);
         ArrayList<String> data=readData(Constants.TEST_DATA_EXCEL_PATH,Constants.LOGIN_PAGE);
         String username=data.get(1);
@@ -21,10 +21,9 @@ public class UserManagementPageTest extends Base {
         String password=data.get(2);
         login.enterPassWord(password);
         HomePage home=login.clickOnLoginButtonElement();
-        String userManagementOptions=home.getUserManagementOptions();
-        System.out.println(userManagementOptions);
 
 
 
-    }*/
+
+    }
 }
