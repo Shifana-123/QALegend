@@ -1,5 +1,6 @@
 package org.qalegend.utilities;
 
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,28 +15,27 @@ public class ExcelUtility {
 
     public static ArrayList<String> readData(String file_path, String sheet)  {
         try {
+            DataFormatter formatter = new DataFormatter();
             String  path= Constants.HOME_DIRECTORY + file_path;
             file = new FileInputStream(path);
             wb = new XSSFWorkbook(file);
-        }
-        catch(Exception ex)
-        {
-            throw new RuntimeException(" Test Data excel sheet not found");
-        }
-        sh = wb.getSheet(sheet);
+            sh = wb.getSheet(sheet);
         ArrayList<String> excelRows = new ArrayList<>();
         int rowCount = sh.getLastRowNum() - sh.getFirstRowNum();
         for (int i = 0; i <= rowCount; i++) {
             Row row = sh.getRow(i);
             int cellCount = row.getLastCellNum();
             for(int j=0;j<cellCount;j++) {
-                excelRows.add(row.getCell(j).getStringCellValue());
+                excelRows.add(formatter.formatCellValue(row.getCell(j)));
             }
         }
-        return excelRows;
+            return excelRows;
+        }
+        catch(Exception ex)
+        {
+            throw new RuntimeException(" Test Data excel sheet not found");
+        }
     }
-
-
 }
 
 
