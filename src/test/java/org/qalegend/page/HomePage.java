@@ -7,9 +7,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.qalegend.utilities.AppUtility;
-import org.qalegend.utilities.WebDriverUtility;
-import org.qalegend.utilities.WebelementUtility;
+import org.qalegend.utilities.*;
 
 import java.util.List;
 
@@ -20,40 +18,65 @@ public class HomePage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
     @FindBy(xpath = "//a[@class='dropdown-toggle']//span[text()='admin KL']")
     WebElement userLoggedAccount;
-    @FindBy(xpath = "/html/body/div[2]/header/nav/div/div/strong")
+    @FindBy(xpath = "//div[@class='m-8 pull-left mt-15 hidden-xs']/strong[text()='19-01-2024']")
     WebElement loginDateElement;
 
-    @FindBy(xpath = "/html/body/div[2]/aside/section/ul/li[2]/a/span[2]/i")
+    @FindBy(xpath = "//span[contains(text(),'User Management')]")
     WebElement userManagementOptionField;
 
-    @FindBy(xpath = "/html/body/div[2]/aside/section/ul/li[2]/ul/li[1]/a/span")
+    @FindBy(xpath = "//span[@class='title' and contains(text(), 'Users')]")
     WebElement usersOptionField;
+
+
+    @FindBy(xpath="//h1[contains(text(), 'Welcome Shifana')]")
+    WebElement registeredUserNameText;
 
 
     public String getTitle() {
         return driver.getTitle();
     }
+
     public String getUserLoggedAccount() {
         String username = WebelementUtility.getTextFromElement(userLoggedAccount);
         return username;
     }
+
     public String getLoginDate() {
-        String loginDate=WebelementUtility.getTextFromElement(loginDateElement);
+        String loginDate = WebelementUtility.getTextFromElement(loginDateElement);
         return loginDate;
     }
-    public void clickOnUserManagement() {
+
+    public UserManagementPage clickOnUserManagement() {
         WebelementUtility.clickOnElement(userManagementOptionField);
+        return new UserManagementPage(driver);
     }
+
+
     public UsersPage clickOnUsersOption() {
-        WebelementUtility.clickOnElement(usersOptionField);
+        if (usersOptionField.isDisplayed() && usersOptionField.isEnabled()) {
+            WebelementUtility.clickOnElement(usersOptionField);
+        }else  {
+            // Handle the case where the element is not interactable
+        }
+        WaitUtility.pageLoadWait(driver,10);
         return new UsersPage(driver);
-    }
-
-
 
     }
+    public String getCurrentDate() {
+        String currentDate=DateUtility.getCurrentDateFormatted("dd-MM-yyyy");
+        return currentDate;
+    }
+    public String getTextFromLoggedUserName() {
+        return WebelementUtility.getTextFromElement(registeredUserNameText);
+    }
+}
+
+
+
+
 
 
 

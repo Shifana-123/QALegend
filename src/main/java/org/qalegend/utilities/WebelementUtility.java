@@ -2,6 +2,8 @@ package org.qalegend.utilities;
 
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class WebelementUtility {
     public static boolean isElementSelected(WebElement element) {
         boolean status= element.isSelected();
@@ -25,5 +27,6 @@ public class WebelementUtility {
         boolean status=element.isEnabled();
         return status;
     }
-}
+    }
+
 

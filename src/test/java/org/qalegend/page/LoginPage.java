@@ -24,11 +24,14 @@ public class LoginPage {
     @FindBy(xpath = "//button[@type='submit']")
     WebElement loginButtonField;
 
-    @FindBy(xpath = "/html/body/div[3]/div/div/div/div[2]/form/div[1]/div/span/strong")
+    @FindBy(xpath = "//span[@class='help-block']//strong[text()='These credentials do not match our records.']")
     WebElement errorMessageField;
 
     @FindBy(xpath = "//a[@class='btn btn-link']")
     WebElement forgotPassWordMenu;
+
+    @FindBy(xpath="//button[@class='btn btn-default btn-sm']")
+    WebElement endTourButtonField;
 
     public String getPageTitle() {
         return driver.getTitle();
@@ -50,11 +53,17 @@ public class LoginPage {
     public HomePage clickOnLoginButtonElement() {
         WebelementUtility.clickOnElement(loginButtonField);
         return new HomePage(driver);
+
     }
     public String getText() {
         String errorMessageText = WebelementUtility.getTextFromElement(errorMessageField);
         return errorMessageText;
     }
+    public HomePage clickOnEndTourButton() {
+        WebelementUtility.clickOnElement(endTourButtonField);
+        return new HomePage(driver);
+    }
+    
 
     }
 

@@ -7,25 +7,31 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.time.Instant;
 
 public class WaitUtility {
-    public static void pageLoadWait(WebDriver driver,int time) {
+
+    public static void pageLoadWait(WebDriver driver, int time) {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(time));
     }
-    public static void implicitWait(WebDriver driver,int time) {
+
+    public static void implicitWait(WebDriver driver, int time) {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(time));
     }
-    public static void explicitWait(WebDriver driver,int time,String locatorvalue) {
-        WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(time));
+
+    public static void explicitWait(WebDriver driver, int time, String locatorvalue) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(locatorvalue)));
         wait.until(ExpectedConditions.alertIsPresent());
     }
-    public static void fluentWait(WebDriver driver,int time,String locatorvalue) {
-        FluentWait wait=new FluentWait(driver);
+
+    public static void fluentWait(WebDriver driver, int time, String locatorvalue) {
+        FluentWait wait = new FluentWait(driver);
         wait.withTimeout(Duration.ofSeconds(time));
         wait.pollingEvery(Duration.ofSeconds(time));
         wait.ignoring(NoSuchElementException.class);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(locatorvalue)));
         wait.until(ExpectedConditions.alertIsPresent());
     }
+
 }

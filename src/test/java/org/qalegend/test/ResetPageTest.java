@@ -5,7 +5,9 @@ import org.qalegend.constants.Constants;
 import org.qalegend.constants.Messages;
 import org.qalegend.page.LoginPage;
 import org.qalegend.page.ResetPage;
+import org.qalegend.retryanalyzer.RetryAnalyzer;
 import org.qalegend.utilities.ExcelUtility;
+import org.qalegend.utilities.RandomUtility;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import static org.testng.Assert.assertEquals;
 
 public class ResetPageTest extends Base {
-    @Test
+    @Test(groups ="Sanity")
     public void verifyResetPageTitle() {
         LoginPage login=new LoginPage(driver);
         ResetPage reset=login.clickOnforgotPassWordMenu();
@@ -23,16 +25,18 @@ public class ResetPageTest extends Base {
         String expectedPageTitle=data.get(1);
         Assert.assertEquals(actualPageTitle,expectedPageTitle, Messages.TITLE_MISMATCH);
     }
-    @Test
+    @Test(groups = "Regression")
     public void verifyErrorMessageWithInvalidEmailID() {
+        String firstName = RandomUtility.getFirstName();
+        String lastName = RandomUtility.getLastName();
+        String emailID = firstName + "." + lastName + "123@yahoo.com";
         LoginPage login=new LoginPage(driver);
         ResetPage reset=login.clickOnforgotPassWordMenu();
-        ArrayList<String> data=ExcelUtility.readData(Constants.TEST_DATA_EXCEL_PATH,Constants.RESET_PAGE);
-        String emailID= data.get(2);
         reset.enterEmailAdress(emailID);
         reset.clickOnSendPassWordRestLink();
         String actualErrorMessage= reset.getText();
+        ArrayList<String> data=ExcelUtility.readData(Constants.TEST_DATA_EXCEL_PATH,Constants.RESET_PAGE);
         String expectedErrorMessage= data.get(3);
-        Assert.assertEquals(actualErrorMessage,expectedErrorMessage,Messages.PASSWORD_RESET_LINK_SEND_SUCCESSFULLY);
+        Assert.assertEquals(actualErrorMessage,expectedErrorMessage,Messages.WRONG_USER_EMAIL);
     }
 }
