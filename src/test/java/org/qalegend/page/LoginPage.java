@@ -21,6 +21,7 @@ public class LoginPage {
     @FindBy(id = "password")
     WebElement passWordField;
 
+
     @FindBy(xpath = "//button[@type='submit']")
     WebElement loginButtonField;
 
@@ -32,6 +33,8 @@ public class LoginPage {
 
     @FindBy(xpath="//button[@class='btn btn-default btn-sm']")
     WebElement endTourButtonField;
+
+
 
     public String getPageTitle() {
         return driver.getTitle();
@@ -63,6 +66,7 @@ public class LoginPage {
         WebelementUtility.clickOnElement(endTourButtonField);
         return new HomePage(driver);
     }
+
     
 
     }

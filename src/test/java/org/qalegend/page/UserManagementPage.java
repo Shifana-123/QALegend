@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.qalegend.utilities.AppUtility;
+import org.qalegend.utilities.WaitUtility;
 import org.qalegend.utilities.WebelementUtility;
 
 import java.util.List;
@@ -22,11 +23,24 @@ public class UserManagementPage {
     WebElement searchField;
 
 
-    @FindBy(xpath="//ul[@class='treeview-menu menu-open']//span[@class='title']")
+    @FindBy(xpath="//span[@class='title']")
     List<WebElement> userManagementMenuOptions;
+
+    @FindBy(xpath = "//span[@class='title' and contains(text(), 'Users')]")
+    WebElement usersOptionField;
 
     public List<String> getUserManagementOptions() {
       return AppUtility.getMenuOption(userManagementMenuOptions);
+    }
+    public UsersPage clickOnUsersOption() {
+        if (usersOptionField.isDisplayed() && usersOptionField.isEnabled()) {
+            WebelementUtility.clickOnElement(usersOptionField);
+        }else  {
+            // Handle the case where the element is not interactable
+        }
+        WaitUtility.pageLoadWait(driver,10);
+        return new UsersPage(driver);
+
     }
 
 

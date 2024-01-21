@@ -63,7 +63,7 @@ public class AddUsersPage {
     public UsersPage clickOnSaveButton() {
         WebelementUtility.clickOnElement(saveButtonField);
         WaitUtility.pageLoadWait(driver,10);
-        driver.navigate().back();
+        driver.navigate().refresh();
         return new UsersPage(driver);
 
     }

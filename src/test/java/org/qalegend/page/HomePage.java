@@ -21,18 +21,16 @@ public class HomePage {
 
     @FindBy(xpath = "//a[@class='dropdown-toggle']//span[text()='admin KL']")
     WebElement userLoggedAccount;
-    @FindBy(xpath = "//div[@class='m-8 pull-left mt-15 hidden-xs']/strong[text()='19-01-2024']")
+    @FindBy(xpath = "//div[@class='m-8 pull-left mt-15 hidden-xs']/strong[text()='21-01-2024']")
     WebElement loginDateElement;
 
     @FindBy(xpath = "//span[contains(text(),'User Management')]")
     WebElement userManagementOptionField;
 
-    @FindBy(xpath = "//span[@class='title' and contains(text(), 'Users')]")
-    WebElement usersOptionField;
 
 
-    @FindBy(xpath="//h1[contains(text(), 'Welcome Shifana')]")
-    WebElement registeredUserNameText;
+    @FindBy(xpath="//a[@class='dropdown-toggle']//span[text()='Shifana S']")
+    WebElement newlyAddedUsersUserName;
 
 
     public String getTitle() {
@@ -55,22 +53,13 @@ public class HomePage {
     }
 
 
-    public UsersPage clickOnUsersOption() {
-        if (usersOptionField.isDisplayed() && usersOptionField.isEnabled()) {
-            WebelementUtility.clickOnElement(usersOptionField);
-        }else  {
-            // Handle the case where the element is not interactable
-        }
-        WaitUtility.pageLoadWait(driver,10);
-        return new UsersPage(driver);
 
-    }
     public String getCurrentDate() {
         String currentDate=DateUtility.getCurrentDateFormatted("dd-MM-yyyy");
         return currentDate;
     }
-    public String getTextFromLoggedUserName() {
-        return WebelementUtility.getTextFromElement(registeredUserNameText);
+    public String getTextNewlyAddedUserName() {
+        return WebelementUtility.getTextFromElement(newlyAddedUsersUserName);
     }
 }
 
