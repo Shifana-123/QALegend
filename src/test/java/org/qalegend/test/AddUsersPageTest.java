@@ -64,6 +64,11 @@ public class AddUsersPageTest extends Base {
 
     @Test(groups = "Smoke")
     public void verifyUserLoginWithNewlyAddedUser() {
+        String firstName=RandomUtility.getFirstName();
+        String lastName=RandomUtility.getLastName();
+        String emailID=firstName + "." +lastName + "123@yahoo.com";
+        String newPassWord=firstName + lastName + "123@";
+        String newUserName=firstName + "newUser";
         LoginPage login = new LoginPage(driver);
         ArrayList<String> data = ExcelUtility.readData(Constants.TEST_DATA_EXCEL_PATH, Constants.LOGIN_PAGE);
         String loginUsername = data.get(1);
@@ -75,29 +80,19 @@ public class AddUsersPageTest extends Base {
         UserManagementPage userManagement=home.clickOnUserManagement();
         UsersPage userPage = userManagement.clickOnUsersOption();
         AddUsersPage adduser = userPage.clickOnAddButton();
-        ArrayList<String> userDatas=ExcelUtility.readData(Constants.TEST_DATA_EXCEL_PATH,Constants.ADD_USER_PAGE);
-        String firstName=userDatas.get(2);
         adduser.enterFirstName(firstName);
-        String lastName=userDatas.get(3);
         adduser.enterLastName(lastName);
-        String emailID=userDatas.get(4);
         adduser.enterEmailId(emailID);
-        String userName=userDatas.get(2);
-        adduser.enterUserName(userName);
-        String passWord=userDatas.get(5);
-        adduser.enterPassWord(passWord);
-        String confirmPassWord=userDatas.get(5);
-        adduser.enterconfirmPassWord(confirmPassWord);
+        adduser.enterUserName(newUserName);
+        adduser.enterPassWord(newPassWord);
+        adduser.enterconfirmPassWord(newPassWord);
         UsersPage usersPage=adduser.clickOnSaveButton();
         usersPage.clickOnUsersLoggedUserName();
-        LoginPage page=usersPage.clickOnSignOutButton();
-        String newUserNameToLogin=userDatas.get(2);
-        login.enterUserName(newUserNameToLogin);
-        String newPasswordToLogin=userDatas.get(5);
-        login.enterPassWord(newPasswordToLogin);
+        LoginPage loginPage=usersPage.clickOnSignOutButton();
+        loginPage.enterUserName(newUserName);
+        loginPage.enterPassWord(newPassWord);
         HomePage homePage=login.clickOnLoginButtonElement();
-        String actualTextOfAddedUser=homePage.getTextNewlyAddedUserName();
-        String expectedTextOfAddedUser=firstName+" " +lastName;
-        Assert.assertEquals(actualTextOfAddedUser,expectedTextOfAddedUser,Messages.NEW_USER_ADDED_FAILED);
+        String actualTextOfAddedUser=homePage.getUserLoggedAccount();
+        Assert.assertEquals(actualTextOfAddedUser,newUserName,Messages.NEW_USER_ADDED_FAILED);
     }
 }

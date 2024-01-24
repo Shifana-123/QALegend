@@ -5,6 +5,7 @@
         <listener class-name="org.qalegend.listeners.ExtentListener"/>
     </listeners>
     <test  name="All Test Cases">
+        <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="org.qalegend.test.AddUsersPageTest"/>
             <class name="org.qalegend.test.HomePageTest"/>

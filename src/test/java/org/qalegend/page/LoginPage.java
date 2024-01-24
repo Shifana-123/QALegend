@@ -25,14 +25,16 @@ public class LoginPage {
     @FindBy(xpath = "//button[@type='submit']")
     WebElement loginButtonField;
 
-    @FindBy(xpath = "//span[@class='help-block']//strong[text()='These credentials do not match our records.']")
-    WebElement errorMessageField;
+
 
     @FindBy(xpath = "//a[@class='btn btn-link']")
     WebElement forgotPassWordMenu;
 
     @FindBy(xpath="//button[@class='btn btn-default btn-sm']")
     WebElement endTourButtonField;
+
+    @FindBy(xpath="//span[@class='help-block']//strong")
+    WebElement errorMessageField;
 
 
 

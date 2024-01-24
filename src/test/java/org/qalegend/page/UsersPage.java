@@ -23,18 +23,18 @@ public class UsersPage {
 
     @FindBy(xpath = "//input[@type='search']")
     WebElement searchField;
-
-    @FindBy(xpath = "//table//tr//td[4][contains(text(), 'shifana123@gmail.com')]")
-    WebElement actualMailIdOfNewlyAddedUser;
-
-    @FindBy(xpath="//a[@class='dropdown-toggle']//span[text()='admin KL']")
+    @FindBy(xpath="//a[@class='dropdown-toggle']//span")
     WebElement usersLoggedUserName;
+
+@FindBy(xpath="//table[@class='table table-bordered table-striped dataTable no-footer']//td[4]")
+WebElement loggedUsersEmailID;
+
+
 
     @FindBy(xpath = "//div[@class='pull-right']//a[@class='btn btn-default btn-flat']")
     WebElement signOutButton;
 
-    @FindBy(xpath="//table//tr[1]/td[4]")
-    WebElement loggedUsersEmailID;
+
 
     public AddUsersPage clickOnAddButton() {
         WebelementUtility.clickOnElement(addButtonField);
@@ -52,7 +52,7 @@ public class UsersPage {
     }
 
     public String getTextOfMailID() {
-        String emailText=WebelementUtility.getTextFromElement(actualMailIdOfNewlyAddedUser);
+        String emailText=WebelementUtility.getTextFromElement(loggedUsersEmailID);
         return emailText;
     }
     public  void clickOnUsersLoggedUserName() {

@@ -9,6 +9,7 @@
         </run>
     </groups>
     <test name="All Test Cases">
+        <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="org.qalegend.test.AddUsersPageTest"/>
             <class name="org.qalegend.test.HomePageTest"/>

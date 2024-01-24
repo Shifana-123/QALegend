@@ -2,6 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <test name="All Test Cases">
+        <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="org.qalegend.test.AddUsersPageTest"/>
             <class name="org.qalegend.test.HomePageTest"/>
